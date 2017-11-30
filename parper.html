@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+    <head><meta http-equiv="Content-Type" content="text/html; charset=GBK"></head>
+    <body>
+        <center>
+        <script>
+
+            var  gTypeString = ["unknown", "10以内加法", "10以内减法", "10以内加减综合", "10以内连加", "10以内连减法", "10以内连续加减综合",
+                                "20以内不进位加法", "20以内不退位减法", "20以内不进位不退位综合","20以内进位加法", "20以内退位减法",
+                                "20以内进位退位加减综合", "20以内加减综合", "20以内连加", "20以内连减","20以内连续加减综合", "综合练习"];
+            
+            function GetRadioValue(vale) {
+                var temp = document.getElementsByName("condition");
+                for(var i=0;i<temp.length;i++)
+                {
+                    if(temp[i].checked){
+                        return temp[i].value;
+                    }
+                }
+                return 1;
+            }
+
+            function GetRandomNum(Min, Max) {
+                var Range = Max - Min;
+                var Rand = Math.random();
+                return (Min + Math.round(Rand * Range));
+            }
+
+            function GetEquation(Type) {
+                var return_string = "unknown type";
+                var Min = 0;
+                var Max = 10;
+
+                switch(parseInt(Type))
+                {
+                    case 1: {
+                        var param1 = GetRandomNum(Min, Max);
+                        var param2 = GetRandomNum(Min, Max-param1);
+                        return_string = (param1.toString() + " + " + param2.toString() + " = ");
+                    }
+                        break;
+                    case 2: {
+                        var param1 = GetRandomNum(Min, Max);
+                        var param2 = GetRandomNum(Min,param1);
+                        return_string = (param1.toString() + " - " + param2.toString() + " = ");
+                    }
+                        break;
+                    case 3: {
+                        var param1 = GetRandomNum(Min, Max);
+                        var is_sub = Math.floor(Math.random() * 100);
+                        if ((is_sub % 2) == 0){
+                            var param2 = GetRandomNum(Min, Max-param1);
+                            return_string = (param1.toString() + " + " + param2.toString() + " = ");
+                        }else{
+                            var param2 = GetRandomNum(Min,param1);
+                            return_string = (param1.toString() + " - " + param2.toString() + " = ");
+                        }
+                    }
+                        break;
+                    case 4: {
+                        var param1 = GetRandomNum(Min, Max);
+                        var param2 = GetRandomNum(Min, Max - param1);
+                        var param3 = GetRandomNum(Min, Max - param1 - param2);
+                        return_string = (param1.toString() + " + " + param2.toString() + " + " + param3.toString() + " = ");
+                    }
+                        break;
+                    case 5: {
+                        var param1 = GetRandomNum(Min, Max);
+                        var param2 = GetRandomNum(Min, param1);
+                        var param3 = GetRandomNum(Min, param1 - param2);
+                        return_string = (param1.toString() + " - " + param2.toString() + " - " + param3.toString() + " = ");
+                    }
+                        break;
+                    case 6: {
+                        var param1 = GetRandomNum(Min, Max);
+                        var is_sub = Math.floor(Math.random() * 100);
+                        if ((is_sub % 2) == 0){
+                            var param2 = GetRandomNum(Min, Max - param1);
+                            var param3 = GetRandomNum(Min, Max - param1 - param2);
+                            return_string = (param1.toString() + " + " + param2.toString() + " + " + param3.toString() + " = ");
+                        }else{
+                            var param2 = GetRandomNum(Min, param1);
+                            var param3 = GetRandomNum(Min, param1 - param2);
+                            return_string = (param1.toString() + " - " + param2.toString() + " - " + param3.toString() + " = ");
+                        }
+                    }
+                        break;
+                    case 7: {
+                        Max = 20;
+                        var param1 = GetRandomNum(Min, Max);
+                        var param2 = GetRandomNum(Min, Max - param1);
+                        return_string = (param1.toString() + " + " + param2.toString() + " = ");
+                    }
+                        break;
+                    case 8: {
+                        Max = 20;
+                        var param1 = GetRandomNum(Min, Max);
+                        var param2 = GetRandomNum(Min, param1);
+                        return_string = (param1.toString() + " - " + param2.toString() + " = ");
+                    }
+                        break;
+                    case 9: {
+                        Max = 20;
+                        var param1 = GetRandomNum(Min, Max);
+                        var is_sub = Math.floor(Math.random() * 100);
+                        if ((is_sub % 2) == 0) {
+                            var param2 = GetRandomNum(Min, Max - param1);
+                            return_string = (param1.toString() + " + " + param2.toString() + " = ");
+                        } else {
+                            var param2 = GetRandomNum(Min, param1);
+                            return_string = (param1.toString() + " - " + param2.toString() + " = ");
+                        }
+                    }
+                        break;
+                    case 10: {
+                        var param1 = GetRandomNum(1, 9);
+                        var param2 = GetRandomNum(10 - param1, 10);
+                        return_string = (param1.toString() + " + " + param2.toString() + " = ");
+                    }
+                        break;
+                    case 11: {
+                        var param1 = GetRandomNum(10, 20);
+                        var param2 = GetRandomNum(0, 9);
+                        return_string = (param1.toString() + " - " + param2.toString() + " = ");
+                    }
+                        break;
+                    case 12: {
+                        var is_sub = Math.floor(Math.random() * 100);
+                        if ((is_sub % 2) == 0) {
+                            var param1 = GetRandomNum(1, 9);
+                            var param2 = GetRandomNum(10 - param1, 10);
+                            return_string = (param1.toString() + " + " + param2.toString() + " = ");
+                        } else {
+                            var param1 = GetRandomNum(10, 20);
+                            var param2 = GetRandomNum(0, 9);
+                            return_string = (param1.toString() + " - " + param2.toString() + " = ");
+                        }
+                    }
+                        break;
+                    case 13: {
+                        Max = 20;
+                        var param1 = GetRandomNum(Min, Max);
+                        var is_sub = Math.floor(Math.random() * 100);
+                        if ((is_sub % 2) == 0) {
+                            var param2 = GetRandomNum(Min, Max - param1);
+                            return_string = (param1.toString() + " + " + param2.toString() + " = ");
+                        } else {
+                            var param2 = GetRandomNum(Min, param1);
+                            return_string = (param1.toString() + " - " + param2.toString() + " = ");
+                        }
+                    }
+                        break;
+                    case 14: {
+                        Max = 20;
+                        var param1 = GetRandomNum(Min, Max);
+                        var param2 = GetRandomNum(Min, Max - param1);
+                        var param3 = GetRandomNum(Min, Max - param1 - param2);
+                        return_string = (param1.toString() + " + " + param2.toString() + " + " + param3.toString() + " = ");
+                    }
+                        break;
+                    case 15: {
+                        Max = 20;
+                        var param1 = GetRandomNum(Min, Max);
+                        var param2 = GetRandomNum(Min, param1);
+                        var param3 = GetRandomNum(Min, param1 - param2);
+                        return_string = (param1.toString() + " - " + param2.toString() + " - " + param3.toString() + " = ");
+                    }
+                        break;
+                    case 16: {
+                        Max = 20;
+                        var param1 = GetRandomNum(Min, Max);
+                        var is_sub = Math.floor(Math.random() * 100);
+                        if ((is_sub % 2) == 0) {
+                            var param2 = GetRandomNum(Min, Max - param1);
+                            var param3 = GetRandomNum(Min, Max - param1 - param2);
+                            return_string = (param1.toString() + " + " + param2.toString() + " + " + param3.toString() + " = ");
+                        } else {
+                            var param2 = GetRandomNum(Min, param1);
+                            var param3 = GetRandomNum(Min, param1 - param2);
+                            return_string = (param1.toString() + " - " + param2.toString() + " - " + param3.toString() + " = ");
+                        }
+                    }
+                        break;
+                    default:
+                        return_string += GetRandomNum(0, 100);
+                        break;
+                }
+
+                return return_string;
+            }
+
+            function PrintOnePage(Num, Type, ForceSplit, ShowPrint) {
+                if(ShowPrint > 0){
+                    document.write("<h2><a href=\"javascript:window.print()\" target=\"_self\" style=\"text-decoration: none;\">一年级第一学期口算题</a></h2>");
+                }else{
+                    document.write("<h2>一年级第一学期口算题</h2>");
+                }
+
+                document.write("<h3>" + gTypeString[Type] + "</h3>");
+                document.write("班级__________ 学号________ 姓名__________<br><br><br>");
+                document.write("<table border=0 width=640 cellspacing=10>");
+                document.write("<tr>");
+
+                var repeat_checker = new Array()
+                var max_checker_num = 0;
+                for (var i = 1; i < Num + 1; i++) {
+                    var equation;
+                    if (parseInt(Type) == 17) {
+                        equation = GetEquation(GetRandomNum(1, 16));
+                    } else {
+                        equation = GetEquation(Type);
+                    }
+
+                    var is_repeat = false;
+                    for(var j=0; j<repeat_checker.length; j++)
+                        if(equation == repeat_checker[j]){
+                            is_repeat = true;
+                            break;
+                        }
+                    
+                    if(is_repeat && max_checker_num < 10){
+                        i--;
+                        max_checker_num++;
+                        continue;
+                    }
+
+                    max_checker_num = 0;
+                    repeat_checker.push(equation);
+
+                    document.write("<td>" + equation + "</td>");
+                    if ((i % 4) == 0) {
+                        document.write("</tr><tr>");
+                    }
+                }
+                document.write("</tr>");
+                document.write("</table>");
+                if (ForceSplit > 0) {
+                    document.write("<p style=\"page-break-after:always;\" />");
+                }
+            }
+
+            function PrintPapers(Pages, Num, Type) {
+                if (Num > 100) {
+                    alert("max questions number is 100 every page!!!!");
+                    return;
+                }
+
+                document.write("<style media=print type=\"text/css\">.noprint{visibility:hidden}</style>");
+                document.write("<center>");
+                //document.write("<a href=\"javascript:window.print()\" target=\"_self\"><p class=\"noprint\">打印</p></a>");
+                if (Pages > 1) {
+                    PrintOnePage(Num, Type, 1, 1);
+                    for (var i = 1; i < Pages - 1; i++) {
+                        PrintOnePage(Num, Type, 1, 0);
+                    }
+                    PrintOnePage(Num, Type, 0, 0);
+                } else {
+                    PrintOnePage(Num, Type, 0, 1);
+                }
+
+                document.write("</center>");
+            }
+
+
+        </script>
+        <br><br><h2><p style="color:blue">一年级第一学期口算题</p></h2>
+        <h3>
+            <form>
+                <table border=0 width=640 cellspacing=10>
+                    <tr><td><input type="radio" name="condition" value="1" checked>10以内加法</td><td><input type="radio" name="condition" value="10">20以内进位加法</td></tr>
+                    <tr><td><input type="radio" name="condition" value="2">10以内减法</td><td><input type="radio" name="condition" value="11">20以内退位减法</td></tr>
+                    <tr><td><input type="radio" name="condition" value="3">10以内加减综合</td><td><input type="radio" name="condition" value="12">20以内进位退位加减综合</td></tr>
+                    <tr><td><input type="radio" name="condition" value="4">10以内连加</td><td><input type="radio" name="condition" value="13">20以内加减综合</td></tr>
+                    <tr><td><input type="radio" name="condition" value="5">10以内连减</td><td><input type="radio" name="condition" value="14">20以内连加</td></tr>
+                    <tr><td><input type="radio" name="condition" value="6">10以内连续加减综合</td><td><input type="radio" name="condition" value="15">20以内连减</td></tr>
+                    <tr><td><input type="radio" name="condition" value="7">20以内不进位加法</td><td><input type="radio" name="condition" value="16">20以内连续加减综合</td></tr>
+                    <tr><td><input type="radio" name="condition" value="8">20以内不退位减法</td><td><input type="radio" name="condition" value="17">综合练习</td></tr>
+                    <tr><td><input type="radio" name="condition" value="9">20以内不进位不退位综合</td></tr>
+                </table>
+                <p>每页题目数: <input type="number" id="numbers" value="100" min="30" max="100"></p>
+                <p>生成的页数: <input type="number" id="pages" value="10" min="1" max="50"></p>
+                <p><input type="button" value="生成试卷" onclick="javascript: PrintPapers(parseInt(document.getElementById('pages').value), parseInt(document.getElementById('numbers').value), GetRadioValue('condition'));"></p>
+            </form>
+        </h3>
+</center>
+
+</body></html>
